@@ -1,12 +1,15 @@
-from keras.engine.topology import Layer, InputSpec
-import keras.utils.conv_utils as conv_utils
+from tensorflow.python.keras.layers import Layer, InputSpec
+from tensorflow.python.keras.utils import conv_utils
 import tensorflow as tf
-import keras.backend as K
+import tensorflow.keras.backend as K
+from tensorflow.python.keras.utils.conv_utils import normalize_data_format
+
 
 class BilinearUpSampling2D(Layer):
     def __init__(self, size=(2, 2), data_format=None, **kwargs):
         super(BilinearUpSampling2D, self).__init__(**kwargs)
-        self.data_format = K.normalize_data_format(data_format)
+        #self.data_format = K.normalize_data_format(data_format)
+        self.data_format = normalize_data_format(data_format)
         self.size = conv_utils.normalize_tuple(size, 2, 'size')
         self.input_spec = InputSpec(ndim=4)
 
