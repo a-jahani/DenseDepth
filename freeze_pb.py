@@ -104,7 +104,7 @@ def convertGraph( modelPath, outdir, numoutputs, prefix, name):
     print('Loading model...')
 
     # Load model into GPU / CPU
-    model = load_model(modelPath, custom_objects=custom_objects, compile=False)
+    net_model = load_model(modelPath, custom_objects=custom_objects, compile=False)
 
     print('\nModel loaded ({0}).'.format(args.model))
 
@@ -134,7 +134,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument('--model','-m', dest='model', default='nyu.h5', required=False, help='REQUIRED: The HDF5 Keras model you wish to convert to .pb')
-    parser.add_argument('--numout','-n', type=int, dest='num_out', default=1,required=True, help='REQUIRED: The number of outputs in the model.')
+    parser.add_argument('--numout','-n', type=int, dest='num_out', default=1,required=False, help='REQUIRED: The number of outputs in the model.')
     parser.add_argument('--outdir','-o', dest='outdir', required=False, default='Pb_file', help='The directory to place the output files - default("./")')
     parser.add_argument('--prefix','-p', dest='prefix', required=False, default='out', help='The prefix for the output aliasing - default("k2tfout")')
     parser.add_argument('--name', dest='name', required=False, default='DenseNet_graph.pb', help='The name of the resulting output graph - default("output_graph.pb")')
